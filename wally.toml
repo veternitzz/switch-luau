@@ -2,6 +2,8 @@
 name = "veternitzz/switch"
 version = "1.0.0"
 registry = "https://github.com/UpliftGames/wally-index"
+license = "MIT"
+description = "A switch implementation in pure luau."
 realm = "shared"
 
 [dependencies]
