@@ -59,7 +59,7 @@ You can also use wally to install the switch module by inserting: ``switch = "ve
 | --------------- | ----- | --------------------- |
 | variable        | any   | The variable to check |
 
-##### Methods (switch.new)
+#### Methods (switch.new)
 **__Switch:Debug()__**: nil
 
 **Description**
@@ -73,7 +73,7 @@ Enables or disabled debug logging. This function was only designed for debugging
 **__Switch:Case()__**: nil
 
 **Description**
-Registers a case if the ``value`` is met and calls the parameter ``func``.
+Registers a case if the ``value`` is met and calls the parameter ``func``. There is no limit to how many cases you can have.
 
 **Parameters**
 | Parameter Name | Type                      | Description                              |
@@ -102,3 +102,18 @@ The default case. This acts as an else statement and will call the ``func`` para
 | Parameter Name | Type                     | Description                               |
 | -------------- | ------------------------ | ----------------------------------------- |
 | func           | any (must be a function) | The function to call if the value is met  |
+
+**Usage Example**
+```luau
+local a = 57
+
+local conditional = switch.new(a)
+
+conditional:Case(56, "==", function()
+    print("56")
+end)
+
+conditional:Default(function()
+    print("Default")
+end)
+```
