@@ -113,6 +113,7 @@ conditional:Case(56, "==", function()
     print("56")
 end)
 
+-- The output will be: "Default"
 conditional:Default(function()
     print("Default")
 end)
