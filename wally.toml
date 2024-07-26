@@ -1,11 +1,11 @@
 [package]
 name = "veternitzz/switch"
-version = "1.0.4"
+version = "2.0.0"
 registry = "https://github.com/UpliftGames/wally-index"
 license = "MIT"
 description = "A switch implementation in pure luau."
 realm = "shared"
 exclude = ["**"]
-include = ["init.luau", "wally.toml"]
+include = ["init.luau", "wally.toml", "LICENSE"]
 
 [dependencies]
