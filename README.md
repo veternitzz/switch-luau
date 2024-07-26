@@ -1,8 +1,6 @@
 # Switch.luau
 Switch.luau is a switch implementation in pure luau.
 
-> **Note:** All issues under the "Known Issues" section in this file will be fixed once ``1.1.0`` releases.
-
 ## Why use a switch statement over an if-statement?
 Switch statements are present in many other languages including C++ and Javascript. Switch statements overall make your code more readable rather than if statements.
 
@@ -10,13 +8,13 @@ Switch statements are present in many other languages including C++ and Javascri
 ```luau
 local a = 10 -- this here is the variable we will be checking
 
-local conditional = switch.Switch(a) -- create our switch statement
+local conditional = switch.new(a) -- create our switch statement
 
-conditional.Case(468, function() -- this is like an if statement
+conditional.Case(468, "==", function() -- this is like an if statement
     print("Hello world")
 end)
 
-conditional.Case(11, function() -- another if statement
+conditional:Case(11, "==" ,function() -- another if statement
     print("11")
 end)
 
@@ -48,12 +46,59 @@ Switch statements are also more diverse. You can switch it up and define your de
 ## Installation
 
 ### Via Github Releases
-You can install the switch module via github releases by downloading the .rbxm file under the latest release.
+You can install the switch module via github releases by downloading the .lua file under the latest release.
 ### Via Wally
-You can also use wally to install the switch module by inserting: ``switch = "veternitzz/switch@1.0.4"`` into your wally config file.
+You can also use wally to install the switch module by inserting: ``switch = "veternitzz/switch@2.0.0"`` into your wally config file.
 > **Note:** No wally releases before 1.0.4 are stable, as I had a little bit of an issue publishing this module.
+## Api Reference
+### Constructors
+**__switch.new()__**: metatable
 
-## Known Issues (will be fixed in v1.1.0)
-- Lack of a "switch" class
-- No easy way to check if the variable is greater than, less than or not equal to using case
-- Able to define default more than once
+**Parameters**
+| Parameter Name  | Type  | Description           |
+| --------------- | ----- | --------------------- |
+| variable        | any   | The variable to check |
+
+##### Methods (switch.new)
+**__Switch:Debug()__**: nil
+
+**Description**
+Enables or disabled debug logging. This function was only designed for debugging and will print when a case or default is registered.
+
+**Parameters**
+| Parameter Name | Type    | Description                                |
+| -------------- | ------- | ------------------------------------------ |
+| enabled        | boolean | Whether to enable or disable debug logging |
+
+**__Switch:Case()__**: nil
+
+**Description**
+Registers a case if the ``value`` is met and calls the parameter ``func``.
+
+**Parameters**
+| Parameter Name | Type                      | Description                              |
+| -------------- | ------------------------- | ---------------------------------------  |
+| value          | any                       | The value to compare the variable to     |
+| operation      | "~=" | "==" | ">" | "<"   | The operation to perform                 |
+| func           | any (must be a function)  | The function to call if the value is met |
+
+**Usage Example**
+```luau
+local a = 47
+
+local conditional = switch.new(a)
+
+-- Because the operation is ~= (not equal to), the output will be "Hello world"
+conditional:Case(46, "~=", function()
+    print("Hello world")
+end)
+```
+**__Switch:Default()__**: nil
+
+**Description**
+The default case. This acts as an else statement and will call the ``func`` parameter if no cases are met. There may be only one registered default case per constructor.
+
+**Parameters**
+| Parameter Name | Type                     | Description                               |
+| -------------- | ------------------------ | ----------------------------------------- |
+| func           | any (must be a function) | The function to call if the value is met  |
