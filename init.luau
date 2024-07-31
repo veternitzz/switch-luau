@@ -14,71 +14,71 @@
 local Switch = {}
 Switch.__index = Switch
 
-function Switch.New(variable: any)
-	local self = setmetatable({}, Switch)
-	self.variable = variable
-	self.defaultRegistered = false
-	self.checked = false
-	self.printOutput = false
-	self.casesRegistered = 0
-	return self
+function Switch.new(variable: any)
+    local self = setmetatable({}, Switch)
+    self.__variable = variable
+    self.__defaultRegistered = false
+    self.__checked = false
+    self.__printOutput = false
+    self.__casesRegistered = 0
+    return self
 end
 
-function Switch:debug(enabled: boolean)
-	self.printOutput = enabled
+function Switch:Debug(enabled: boolean)
+    self.__printOutput = enabled
 end
 
-function Switch:case(value: any, operation: "~=" | "==" | ">" | "<" | ">=" | "<=", func: any)
-	if self.checked then
-		return self
-	end
+function Switch:Case(value: any, operation: "~=" | "==" | ">" | "<" | ">=" | "<=", func: any)
+    if self.__checked then
+        return self
+    end
 
-	self.casesRegistered += 1
+    self.__casesRegistered += 1
 
-	if self.printOutput then
-		print(`[switch-output] Registered case # {self.casesRegistered}`)
-	end
+    if self.__printOutput then
+        print(`[switch-output] Registered case # {self.__casesRegistered}`)
+    end
 
-	local match = false
-	if operation == "~=" then
-		match = self.variable ~= value
-	elseif operation == "==" then
-		match = self.variable == value
-	elseif operation == ">" then
-		match = self.variable > value
-	elseif operation == "<" then
-		match = self.variable < value
-	elseif operation == "<=" then
-		match = self.variable <= value
-	elseif operation == ">=" then
-		match = self.variable >= value
-	end
+    local match = false
+    if operation == "~=" then
+        match = self.__variable ~= value
+    elseif operation == "==" then
+        match = self.__variable == value
+    elseif operation == ">" then
+        match = self.__variable > value
+    elseif operation == "<" then
+        match = self.__variable < value
+    elseif operation == "<=" then
+        match = self.__variable <= value
+    elseif operation == ">=" then
+        match = self.__variable >= value
+    end
 
-	if match then
-		self.checked = true
-		func()
-	end
+    if match then
+        self.__checked = true
+        func()
+    end
 
-	return self
+    return self
 end
 
-function Switch:default(func: any)
-	if self.defaultRegistered then
-		error("Default was already registered")
-		return self
-	end
+function Switch:Default(func: any)
+    if self.__defaultRegistered then
+        error("Default was already registered")
+        return self
+    end
 
-	if not self.checked then
-		if self.printOutput then
-			print("[switch-output] Registered default case")
-		end
+    if not self.__checked then
+        if self.__printOutput then
+            print("[switch-output] Registered default case")
+        end
 
-		self.defaultRegistered = true
-		self.checked = true
-		func()
-	end
+        self.__defaultRegistered = true
+        self.__checked = true
+        func()
+    end
 
-	return self
+    return self
 end
 
 return Switch
