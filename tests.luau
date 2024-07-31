@@ -8,14 +8,14 @@ tests["1st case should execute"] = function()
 	local case2Executed = false
 	local defaultExecuted = false
 
-	Switch.New(jobsVariable)
-		:case("Engineer", "==", function()
+	Switch.new(jobsVariable)
+		:Case("Engineer", "==", function()
 			case1Executed = true
 		end)
-		:case("Artist", "==", function()
+		:Case("Artist", "==", function()
 			case2Executed = true
 		end)
-		:default(function()
+		:Default(function()
 			defaultExecuted = true
 		end)
 
@@ -30,14 +30,14 @@ tests["default should execute"] = function()
 	local case2Executed = false
 	local defaultExecuted = false
 
-	Switch.New(jobsVariable)
-		:case("Engineer", "==", function()
+	Switch.new(jobsVariable)
+		:Case("Engineer", "==", function()
 			case1Executed = true
 		end)
-		:case("Artist", "==", function()
+		:Case("Artist", "==", function()
 			case2Executed = true
 		end)
-		:default(function()
+		:Default(function()
 			defaultExecuted = true
 		end)
 
@@ -50,11 +50,11 @@ tests["not equal case should execute"] = function()
 	local jobsVariable = "Doctor"
 	local caseExecuted = false
 
-	Switch.New(jobsVariable)
-		:case("Engineer", "~=", function()
+	Switch.new(jobsVariable)
+		:Case("Engineer", "~=", function()
 			caseExecuted = true
 		end)
-		:default(function()
+		:Default(function()
 			caseExecuted = false
 		end)
 
@@ -65,11 +65,11 @@ tests["greater than case should execute"] = function()
 	local ageVariable = 25
 	local caseExecuted = false
 
-	Switch.New(ageVariable)
-		:case(20, ">", function()
+	Switch.new(ageVariable)
+		:Case(20, ">", function()
 			caseExecuted = true
 		end)
-		:default(function()
+		:Default(function()
 			caseExecuted = false
 		end)
 
@@ -80,11 +80,11 @@ tests["less than case should execute"] = function()
 	local ageVariable = 15
 	local caseExecuted = false
 
-	Switch.New(ageVariable)
-		:case(20, "<", function()
+	Switch.new(ageVariable)
+		:Case(20, "<", function()
 			caseExecuted = true
 		end)
-		:default(function()
+		:Default(function()
 			caseExecuted = false
 		end)
 
@@ -95,11 +95,11 @@ tests["greater than or equal case should execute"] = function()
 	local ageVariable = 20
 	local caseExecuted = false
 
-	Switch.New(ageVariable)
-		:case(20, ">=", function()
+	Switch.new(ageVariable)
+		:Case(20, ">=", function()
 			caseExecuted = true
 		end)
-		:default(function()
+		:Default(function()
 			caseExecuted = false
 		end)
 
@@ -110,11 +110,11 @@ tests["less than or equal case should execute"] = function()
 	local ageVariable = 20
 	local caseExecuted = false
 
-	Switch.New(ageVariable)
-		:case(20, "<=", function()
+	Switch.new(ageVariable)
+		:Case(20, "<=", function()
 			caseExecuted = true
 		end)
-		:default(function()
+		:Default(function()
 			caseExecuted = false
 		end)
 
@@ -127,14 +127,14 @@ tests["only one case should execute"] = function()
 	local case2Executed = false
 	local defaultExecuted = false
 
-	Switch.New(jobsVariable)
-		:case("Engineer", "==", function()
+	Switch.new(jobsVariable)
+		:Case("Engineer", "==", function()
 			case1Executed = true
 		end)
-		:case("Engineer", "==", function()
+		:Case("Engineer", "==", function()
 			case2Executed = true
 		end)
-		:default(function()
+		:Default(function()
 			defaultExecuted = true
 		end)
 
@@ -147,11 +147,11 @@ tests["default registered twice should error"] = function()
 	local jobsVariable = "Construction"
 	local errorOccurred = false
 
-	local switch = Switch.New(jobsVariable)
-		:default(function() end)
+	local switch = Switch.new(jobsVariable)
+		:Default(function() end)
 
 	local success, errorMessage = pcall(function()
-		switch:default(function() end)
+		switch:Default(function() end)
 	end)
 
 	if not success and string.find(errorMessage, "Default was already registered") then

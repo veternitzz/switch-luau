@@ -10,14 +10,14 @@ local Switch = require(...) -- Change ... to the path of the ModuleScript
 
 local numberVariable = 10 -- this here is the variable we will be checking
 
-Switch.New(numberVariable)
-    :case(468, "==", function()
+Switch.new(numberVariable)
+    :Case(468, "==", function()
         print("numberVariable is equal to 468")
     end)
-    :case(20, ">", function()
+    :Case(20, ">", function()
         print("numberVariable is greater than 20")
     end)
-    :default(function()
+    :Default(function()
         print("numberVariable doesn't match the cases")
     end)
 ```
@@ -51,14 +51,14 @@ You can also use wally to install the switch module by inserting: ``switch = "ve
 > **Note:** No wally releases before 1.0.4 are stable, as I had a little bit of an issue publishing this module.
 ## Api Reference
 ### Constructors
-**__Switch.New()__**: metatable
+**__Switch.new()__**: metatable
 
 **Parameters**
 | Parameter Name  | Type  | Description           |
 | --------------- | ----- | --------------------- |
 | variable        | any   | The variable to check |
 
-#### Methods (switch.New)
+#### Methods (switch.new)
 **__Switch:debug()__**: nil
 
 **Description**
@@ -69,7 +69,7 @@ Enables or disabled debug logging. This function was only designed for debugging
 | -------------- | ------- | ------------------------------------------ |
 | enabled        | boolean | Whether to enable or disable debug logging |
 
-**__Switch:case()__**: Switch
+**__Switch:Case()__**: Switch
 
 **Description**
 Registers a case if the ``value`` is met and calls the parameter ``func``. There is no limit to how many cases you can have.
@@ -108,11 +108,11 @@ local a = 57
 
 -- The output will be: "Default"
 
-Switch.New(a)
-    :case(56, "==", function()
+Switch.new(a)
+    :Case(56, "==", function()
         print("56")
     end)
-    :default(function()
+    :Default(function()
         print("Default")
     end)
 ```
