@@ -6,6 +6,6 @@ license = "MIT"
 description = "A switch implementation in pure luau."
 realm = "shared"
 exclude = ["**"]
-include = ["init.luau", "wally.toml", "LICENSE"]
+include = ["src/init.luau "wally.toml", "LICENSE"]
 
 [dependencies]
