@@ -1,4 +1,5 @@
 -- v2.0.0
+-- built from source
 
 --[[
 	Made by: veternitzz (@alex_black20101)
