@@ -1,0 +1,10 @@
+{
+  "name": "switch-luau",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "$path": "src"
+    }
+  }
+}
