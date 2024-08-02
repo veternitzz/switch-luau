@@ -2,41 +2,40 @@
 Switch.luau is a switch implementation in pure luau.
 
 ## Why use a switch statement over an if-statement?
-Switch statements are present in many other languages including C++ and Javascript. Switch statements overall make your code more readable rather than if statements.
+Switch statements, popular in many programming languages, offer a cleaner and more readable solution to deeply nested if-else statements. Switch statements also handle fall-through cases and defaults, reducing the chances of logic errors. 
 
 ### With switch statements:
 ```luau
-local a = 10 -- this here is the variable we will be checking
+local Switch = require(...) -- Change ... to the path of the ModuleScript
 
-local conditional = switch.new(a) -- create our switch statement
+local numberVariable = 10 -- this here is the variable we will be checking
 
-conditional.Case(468, "==", function() -- this is like an if statement
-    print("Hello world")
-end)
-
-conditional:Case(11, "==" ,function() -- another if statement
-    print("11")
-end)
-
-conditional.Default(function() -- and this is like an else statement
-    print("Default")
-end)
+Switch.new(numberVariable)
+    :Case(468, "==", function()
+        print("numberVariable is equal to 468")
+    end)
+    :Case(20, ">", function()
+        print("numberVariable is greater than 20")
+    end)
+    :Default(function()
+        print("numberVariable doesn't match the cases")
+    end)
 ```
-Output: ``Default``
+Output: ``numberVariable doesn't match the cases``
 
 ### Without switch statements
 ```luau
-local a = 10 -- this is the variable we will be checking
+local numberVariable = 10 -- this is the variable we will be checking
 
-if a == 468 then
-    print("Hello world")
-elseif a == 11 then
-    print("11")
+if numberVariable == 468 then
+    print("numberVariable is equal to 468")
+elseif numberVariable == 11 then
+    print("numberVariable is greater than 20")
 else
-    print("Default")
+    print("numberVariable doesn't match the cases")
 end
 ```
-Output: ``Default``
+Output: ``numberVariable doesn't match the cases``
 
 ### Conclusion
 Ultimately, switch statements are more readable. Especially if you have a lot of nested if-statements in your code. Switch statements allow us to space out our cases as much as we want. They also make it easier to remove a condition.
@@ -52,7 +51,7 @@ You can also use wally to install the switch module by inserting: ``switch = "ve
 > **Note:** No wally releases before 1.0.4 are stable, as I had a little bit of an issue publishing this module.
 ## Api Reference
 ### Constructors
-**__switch.new()__**: metatable
+**__Switch.new()__**: metatable
 
 **Parameters**
 | Parameter Name  | Type  | Description           |
@@ -60,7 +59,7 @@ You can also use wally to install the switch module by inserting: ``switch = "ve
 | variable        | any   | The variable to check |
 
 #### Methods (switch.new)
-**__Switch:Debug()__**: nil
+**__Switch:debug()__**: nil
 
 **Description**
 Enables or disabled debug logging. This function was only designed for debugging and will print when a case or default is registered.
@@ -70,7 +69,7 @@ Enables or disabled debug logging. This function was only designed for debugging
 | -------------- | ------- | ------------------------------------------ |
 | enabled        | boolean | Whether to enable or disable debug logging |
 
-**__Switch:Case()__**: nil
+**__Switch:Case()__**: Switch
 
 **Description**
 Registers a case if the ``value`` is met and calls the parameter ``func``. There is no limit to how many cases you can have.
@@ -79,7 +78,7 @@ Registers a case if the ``value`` is met and calls the parameter ``func``. There
 | Parameter Name | Type                      | Description                              |
 | -------------- | ------------------------- | ---------------------------------------  |
 | value          | any                       | The value to compare the variable to     |
-| operation      | "~=" | "==" | ">" | "<"   | The operation to perform                 |
+| operation      | "~=", "==", ">", ">=", "<", "<=" | The operation to perform                 |
 | func           | any (must be a function)  | The function to call if the value is met |
 
 **Usage Example**
@@ -107,14 +106,13 @@ The default case. This acts as an else statement and will call the ``func`` para
 ```luau
 local a = 57
 
-local conditional = switch.new(a)
-
-conditional:Case(56, "==", function()
-    print("56")
-end)
-
 -- The output will be: "Default"
-conditional:Default(function()
-    print("Default")
-end)
+
+Switch.new(a)
+    :Case(56, "==", function()
+        print("56")
+    end)
+    :Default(function()
+        print("Default")
+    end)
 ```
