@@ -10,6 +10,9 @@
     Licensed under the MIT License
 ]]
 
+-- Statement Operator Type
+export type StatementOperator = "~=" | "==" | ">" | "<" | ">=" | "<="
+
 -- Switch class
 local Switch = {}
 Switch.__index = Switch
@@ -28,7 +31,7 @@ function Switch:Debug(enabled: boolean)
     self.__printOutput = enabled
 end
 
-function Switch:Case(value: any, operation: "~=" | "==" | ">" | "<" | ">=" | "<=", func: any)
+function Switch:Case(value: any, operation: StatementOperator, func: any)
     if self.__checked then
         return self
     end
