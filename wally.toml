@@ -1,6 +1,6 @@
 [package]
 name = "veternitzz/switch"
-version = "2.1.0"
+version = "2.1.1"
 registry = "https://github.com/UpliftGames/wally-index"
 license = "MIT"
 description = "A switch implementation in pure luau."
