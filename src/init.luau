@@ -13,6 +13,31 @@
 -- Statement Operator Type
 export type StatementOperator = "~=" | "==" | ">" | "<" | ">=" | "<="
 
+-- Internal class (for docs)
+local Internal = {}
+Internal.__index = Internal
+
+-- Statement Check Function
+function Internal.StatementCheck(operation: StatementOperator, variable: any, value: any)
+    local match = false
+
+    if operation == "~=" then
+        match = variable ~= value
+    elseif operation == "==" then
+        match = variable == value
+    elseif operation == ">" then
+        match = variable > value
+    elseif operation == "<" then
+        match = variable < value
+    elseif operation == "<=" then
+        match = variable <= value
+    elseif operation == ">=" then
+        match = variable >= value
+    end
+
+    return match
+end
+
 -- Switch class
 local Switch = {}
 Switch.__index = Switch
@@ -42,20 +67,7 @@ function Switch:Case(value: any, operation: StatementOperator, func: any)
         print(`[switch-output] Registered case # {self.__casesRegistered}`)
     end
 
-    local match = false
-    if operation == "~=" then
-        match = self.__variable ~= value
-    elseif operation == "==" then
-        match = self.__variable == value
-    elseif operation == ">" then
-        match = self.__variable > value
-    elseif operation == "<" then
-        match = self.__variable < value
-    elseif operation == "<=" then
-        match = self.__variable <= value
-    elseif operation == ">=" then
-        match = self.__variable >= value
-    end
+    local match = Internal.StatementCheck(operation, self.__variable, value)
 
     if match then
         self.__checked = true
