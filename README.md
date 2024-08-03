@@ -45,9 +45,9 @@ Switch statements are also more diverse. You can switch it up and define your de
 ## Installation
 
 ### Via Github Releases
-You can install the switch module via github releases by downloading the .lua file under the latest release.
+You can install the switch module via github releases by downloading the .rbxl file under the latest release.
 ### Via Wally
-You can also use wally to install the switch module by inserting: ``switch = "veternitzz/switch@2.1.0"`` into your wally config file.
+You can also use wally to install the switch module by inserting: ``switch = "veternitzz/switch@2.1.1"`` into your wally config file.
 > **Note:** No wally releases before 1.0.4 are stable, as I had a little bit of an issue publishing this module.
 ## Api Reference
 ### Constructors
