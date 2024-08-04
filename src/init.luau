@@ -10,14 +10,30 @@
     Licensed under the MIT License
 ]]
 
--- Statement Operator Type
+--[=[
+    @type StatementOperator "~=" | "==" | ">" | "<" | ">=" | "<="
+    @within Switch
+    Statement Operators like equals to, not equals to, greater than, etc.
+]=]
 export type StatementOperator = "~=" | "==" | ">" | "<" | ">=" | "<="
 
--- Internal class (for docs)
+--[=[
+    @class Internal
+    @private
+    Internal functions and variables for use by maintainers and contributors. Is not accessible outside of the module. See switch for public methods.
+]=]
 local Internal = {}
 Internal.__index = Internal
 
--- Statement Check Function
+--[=[
+    @function StatementCheck
+    @within Internal
+    @param operation StatementOperator -- The operation to perform on value and variable
+    @param variable any -- The variable to check
+    @param value any  -- The value to check
+    @return bool -- Returns whether the value meets the variable based on the operation
+    Checks the provided value and see if it meets the variable provided.
+]=]
 function Internal.StatementCheck(operation: StatementOperator, variable: any, value: any)
     local match = false
 
@@ -38,10 +54,21 @@ function Internal.StatementCheck(operation: StatementOperator, variable: any, va
     return match
 end
 
--- Switch class
+--[=[
+    @class Switch
+    The main switch class.
+]=]
 local Switch = {}
 Switch.__index = Switch
 
+--[=[
+    @function new
+    @within Switch
+    @tag Constructor
+    @param variable any -- The variable for the switch to check
+    @return nil
+    Returns a switch class.
+]=]
 function Switch.new(variable: any)
     local self = setmetatable({}, Switch)
     self.__variable = variable
@@ -52,10 +79,25 @@ function Switch.new(variable: any)
     return self
 end
 
+--[=[
+    @method Debug
+    @within Switch
+    @param enabled bool -- Whether to enaable or disable debug mode
+    @return nil
+    If enabled, will print when switches and defaults are registered.
+]=]
 function Switch:Debug(enabled: boolean)
     self.__printOutput = enabled
 end
 
+--[=[
+    @method Case
+    @within Switch
+    @param value any -- The value to check with the variable
+    @param operation StatementOperator -- The operator to use on value and variable
+    @param func any -- The function to call if it's a match
+    Define a new case, this acts like an if statement
+]=]
 function Switch:Case(value: any, operation: StatementOperator, func: any)
     if self.__checked then
         return self
@@ -77,6 +119,13 @@ function Switch:Case(value: any, operation: StatementOperator, func: any)
     return self
 end
 
+--[=[
+    @method Default
+    @tag Only one can be reigstered per constructor
+    @within Switch
+    @param func any -- The function to call
+    Define a default which acts as an else statement
+]=]
 function Switch:Default(func: any)
     if self.__defaultRegistered then
         error("Default was already registered")
