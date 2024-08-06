@@ -1,4 +1,4 @@
--- v2.1.1
+    -- v2.1.1
 
 --[[
     Made by: veternitzz (@alex_black20101)
@@ -35,22 +35,16 @@ Internal.__index = Internal
     Checks the provided value and see if it meets the variable provided.
 ]=]
 function Internal.StatementCheck(operation: StatementOperator, variable: any, value: any)
-    local match = false
+    local operations = {
+        ["~="] = function(a, b) return a ~= b end,
+        ["=="] = function(a, b) return a == b end,
+        [">"] = function(a, b) return a > b end,
+        ["<"] = function(a, b) return a < b end,
+        ["<="] = function(a, b) return a <= b end,
+        [">="] = function(a, b) return a >= b end,
+    }    
 
-    if operation == "~=" then
-        match = variable ~= value
-    elseif operation == "==" then
-        match = variable == value
-    elseif operation == ">" then
-        match = variable > value
-    elseif operation == "<" then
-        match = variable < value
-    elseif operation == "<=" then
-        match = variable <= value
-    elseif operation == ">=" then
-        match = variable >= value
-    end
-
+    local match = operations[operation](variable, value)
     return match
 end
 
