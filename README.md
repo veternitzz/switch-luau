@@ -1,3 +1,5 @@
+# NOTICE: This repo is deprecated as I have woken up to the fact I did this all wrong. I am deprecating this and including a better implementation in a large-scale project I am working on.
+
 # Switch.luau
 Switch.luau is a switch implementation in pure luau.
 
